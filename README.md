@@ -61,8 +61,3 @@ Entry                  | Description                                | Equivalent
 @weekly                | Run once a week, midnight on Sunday        | 0 0 0 * * 0
 @daily (or @midnight)  | Run once a day, midnight                   | 0 0 0 * * *
 @hourly                | Run once an hour, beginning of hour        | 0 0 * * * *
-
-
-### TODO
-
-Provide a view to add, edit and delete entries in the scheduler. Functionality to restart the scheduler when entries are added and deleted.

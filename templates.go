@@ -108,3 +108,42 @@ const EditTmplStr = `
 </p>
 {{ end }}
 `
+
+const AddTmplStr = `
+{{ define "title"}}<title>Skeddy - Add Entries</title>{{ end }}
+{{ define "content" }}
+<div class="page-header"> <h4>Add entries</h4> </div>
+<p class="lead">
+<form class="form-horizontal" action="/add/" method="post">
+  <input type="hidden" class="form-control" name="id" value="{{.ID}}">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Cron Expression</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="* * * * *" name="expression" value="{{.Expression}}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Endpoint</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="Endpoint URL" name="endpoint" value="{{.Endpoint}}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Payload</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" placeholder="Endpoint URL" name="payload" value="{{.Payload}}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <input type="submit" class="btn btn-default"/>
+      <a href="/" class="btn btn-default">Cancel</a>
+    </div>
+  </div>
+</form>
+</p>
+{{ end }}
+`

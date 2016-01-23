@@ -37,3 +37,23 @@ func (s *Storage) AllEntries() []*Entry {
 	}
 	return result
 }
+
+func (s *Storage) GetEntry(id string) *Entry {
+	data, err := s.DB.Get([]byte(id), nil)
+	if err != nil {
+		return nil
+	}
+	entry, err := NewEntryFromBytes(data)
+	if err != nil {
+		return nil
+	}
+	return entry
+}
+
+func (s *Storage) DeleteEntry(id string) error {
+  err := s.DB.Delete([]byte(id), nil)
+  if err != nil {
+		return err
+	}
+  return nil
+}

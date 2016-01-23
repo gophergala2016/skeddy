@@ -13,5 +13,10 @@ func StartAdminInterface(host string, port int) {
   http.HandleFunc("/", viewHandler)
 	http.HandleFunc("/assets/css/", cssHandler)
 	http.HandleFunc("/assets/js/", jsHandler)
+  http.HandleFunc("/new/", newHandler)
+  http.HandleFunc("/edit/", editHandler)
+  http.HandleFunc("/save/", saveHandler)
+  http.HandleFunc("/add/", addHandler)
+  http.HandleFunc("/delete/", deleteHandler)
   http.ListenAndServe(addr, nil)
 }

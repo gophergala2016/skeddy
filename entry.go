@@ -3,6 +3,7 @@ package main
 import(
   "github.com/pborman/uuid"
   "encoding/json"
+  "net/http"
 )
 
 type Entry struct {
@@ -31,4 +32,8 @@ func NewEntryFromBytes(b []byte) (*Entry, error) {
     return nil, err
   }
   return &e, nil
+}
+
+func NewEntryFromReq(r *http.Request) *Entry {
+	return &Entry{ID: r.FormValue("id"), Expression: r.FormValue("expression"), Endpoint: r.FormValue("endpoint"), Payload: r.FormValue("payload")}
 }

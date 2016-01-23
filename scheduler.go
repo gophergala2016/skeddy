@@ -19,13 +19,23 @@ func (s *Scheduler) Start(entries []*Entry) {
 	log.Println("Starting scheduler ...")
 	s.Instance.Start()
 	for _, e := range entries {
-		s.addEntry(e)
+		s.AddEntry(e)
 	}
 }
 
-func (s *Scheduler) addEntry(e *Entry) {
+func (s *Scheduler) AddEntry(e *Entry) {
   log.Println("Adding entry", e)
   s.Instance.AddFunc(e.Expression, func() { Dispatch(e.Endpoint, e.Payload) })
+}
+
+func (s *Scheduler) ReStart(entries []*Entry) {
+	log.Println("Restarting scheduler ...")
+	s.Instance.Stop()
+	s.Instance = cron.New()
+	s.Instance.Start()
+	for _, e := range entries {
+		s.AddEntry(e)
+	}
 }
 
 func StartScheduler() {
