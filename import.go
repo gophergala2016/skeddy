@@ -21,11 +21,14 @@ func readSentence(sentence string){
     } else {
       ep = temp
     }
-    go Skeddy.AddEntry(exp, ep, p)
+    entry := NewEntry(exp, ep, p)
+		err := Store.SaveEntry(entry)
+    if err != nil {
+      log.Println("Error: ", err)
+    }
   } else {
     fmt.Println("Endpoint URL not given")
   }
-  fmt.Println("Expression: ", exp,"Endpoint: ",ep,"Payload: ",p)
 }
 
 func ImportFile(filename string) error {
@@ -36,8 +39,6 @@ func ImportFile(filename string) error {
     return err
   }
   defer file.Close()
-  Skeddy = NewScheduler()
-  Skeddy.Start()
   scanner := bufio.NewScanner(file)
   for scanner.Scan() {
     sentence := scanner.Text()
