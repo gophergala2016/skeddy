@@ -8,6 +8,8 @@ import(
 
 var(
 	cronfile = flag.String("i", "", "import from crontab file.")
+  host     = flag.String("s", "0.0.0.0", "bind to ip address.")
+	port     = flag.Int("p", 8080, "port to listen.")
 )
 
 func main(){
@@ -23,4 +25,5 @@ func main(){
 		flag.Usage()
     os.Exit(1)
 	}
+  StartAdminInterface(*host, *port)
 }
