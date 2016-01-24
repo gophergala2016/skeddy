@@ -75,28 +75,42 @@ const EditTmplStr = `
 {{ define "title"}}<title>Skeddy - Edit Entries</title>{{ end }}
 {{ define "content" }}
 <div class="page-header"> <h4>Edit entries</h4> </div>
+<div class="col-sm-5 pull-right" style="border:solid">
+  <h4>Help document for Cron expression</h4>
+  <div>
+    A cron expression represents a set of times:
+    <li> using 6 space-separated fields
+    <br/>
+      &nbsp;[seconds] [minutes] [hour] [day of month] [month] [day of week]
+    <li> using predefined schedules
+    <br/>
+      &nbsp;@yearly (or @annually), @monthly, @weekly, @daily (or @midnight), @hourly
+    <br/>
+      For further information, check the documentation <a href="https://godoc.org/github.com/robfig/cron">here</a>
+  </div>
+</div>
 <p class="lead">
-<form enctype="multipart/form-data" name="edit-form" class="form-horizontal" action="/save/" method="post" >
+<form enctype="multipart/form-data" name="edit-form" class="form-horizontal col-sm-7 pull-left" action="/save/" method="post" >
   <input type="hidden" class="form-control" name="id" value="{{.ID}}">
   <div class="form-group">
-    <label class="col-sm-2 control-label">Cron Expression</label>
-    <div class="col-sm-10">
+    <label class="col-sm-5 control-label">Cron Expression</label>
+    <div class="col-sm-5">
       <input type="text" id="expression" class="form-control" placeholder="* * * * *" name="expression" value="{{.Expression}}" onfocusout="validateExpression()" required>
       <div id="validate"></div>
     </div>
   </div>
 
   <div class="form-group">
-    <label class="col-sm-2 control-label">Endpoint</label>
-    <div class="col-sm-10">
+    <label class="col-sm-5 control-label">Endpoint</label>
+    <div class="col-sm-5">
       <input type="url" id="url" class="form-control" placeholder="Endpoint URL" name="endpoint" value="{{.Endpoint}}" onfocusout="validateURL()" required>
       <div id="validate_url"></div>
     </div>
   </div>
 
   <div class="form-group">
-    <label class="col-sm-2 control-label">Payload</label>
-    <div class="col-sm-10">
+    <label class="col-sm-5 control-label">Payload</label>
+    <div class="col-sm-5">
       <input type="text" id="payload" class="form-control" placeholder="Payload" name="payload" value="{{.Payload}}" onfocusout="enableSubmission()">
       <br/>
       <input id="fileupload" type="file" title="add files" name="files" onchange="getFile()"/>
@@ -104,7 +118,7 @@ const EditTmplStr = `
   </div>
 
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-sm-offset-5 col-sm-5">
       <input type="submit" class="btn btn-success" id="submitBtn" disabled/>
       <a href="/" class="btn btn-danger">Cancel</a>
     </div>
@@ -122,35 +136,49 @@ const AddTmplStr = `
 {{ define "title"}}<title>Skeddy - Add Entries</title>{{ end }}
 {{ define "content" }}
 <div class="page-header"> <h4>Add entries</h4> </div>
+<div class="col-sm-5 pull-right" style="border:solid">
+  <h4>Help document for Cron expression</h4>
+  <div>
+    A cron expression represents a set of times:
+    <li> using 6 space-separated fields
+    <br/>
+      &nbsp;[seconds] [minutes] [hour] [day of month] [month] [day of week]
+    <li> using predefined schedules
+    <br/>
+      &nbsp;@yearly (or @annually), @monthly, @weekly, @daily (or @midnight), @hourly
+    <br/>
+      For further information, check the documentation <a href="https://godoc.org/github.com/robfig/cron">here</a>
+  </div>
+</div>
 <p class="lead">
-<form enctype="multipart/form-data" class="form-horizontal" action="/add/" method="post">
+<form enctype="multipart/form-data" class="form-horizontal col-sm-7 pull-left" action="/add/" method="post">
   <input type="hidden" class="form-control" name="id" value="{{.ID}}">
   <div class="form-group">
-    <label class="col-sm-2 control-label">Cron Expression</label>
-    <div class="col-sm-10">
+    <label class="col-sm-5 control-label">Cron Expression</label>
+    <div class="col-sm-5">
       <input type="text" id="expression" class="form-control" placeholder="* * * * *" name="expression" value="{{.Expression}}" onfocusout="validateExpression()" required>
       <div id="validate"></div>
     </div>
   </div>
 
   <div class="form-group">
-    <label class="col-sm-2 control-label">Endpoint</label>
-    <div class="col-sm-10">
+    <label class="col-sm-5 control-label">Endpoint</label>
+    <div class="col-sm-5">
       <input type="url" id="url" class="form-control" placeholder="Endpoint URL" name="endpoint" value="{{.Endpoint}}" onfocusout="validateURL()" required>
       <div id="validate_url"></div>
     </div>
   </div>
 
   <div class="form-group">
-    <label class="col-sm-2 control-label">Payload</label>
-    <div class="col-sm-10">
+    <label class="col-sm-5 control-label">Payload</label>
+    <div class="col-sm-5">
       <input type="text" id="payload" class="form-control" placeholder="Payload" name="payload" value="{{.Payload}}" onfocusout="enableSubmission()">
       <input id="fileupload" type="file" title="add files" name="files" onchange="getFile()"/>
     </div>
   </div>
 
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-sm-offset-5 col-sm-5">
       <input type="submit" class="btn btn-success" id="submitBtn" disabled/>
       <a href="/" class="btn btn-danger">Cancel</a>
     </div>
