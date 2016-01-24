@@ -5,6 +5,7 @@ A lightweight cloud savvy time based scheduler which does nothing but handoff th
 # Installation
 
 - Install go packages as follows :
+
     ```
       $ go get github.com/pborman/uuid
       $ go get github.com/robfig/cron
@@ -33,14 +34,13 @@ A lightweight cloud savvy time based scheduler which does nothing but handoff th
     port to listen (default 8080)
 
   ``` -s host-name ```
-    bind to ip address. (default "0.0.0.0")
+    bind to ip address (default "0.0.0.0")
 
-```
 
 ### CRON Table Format
 
 ```
-<cron_expression> <http_endpoint> <payload>
+  <cron_expression> <http_endpoint> <payload>
 ```
 
 cron_expression should be in accordance to the cron expression format given [here](https://godoc.org/github.com/robfig/cron), payload can be raw json or json file from where payload will be read. JSON file should be given as @filename.json.
