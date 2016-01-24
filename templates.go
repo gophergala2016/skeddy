@@ -173,6 +173,7 @@ const AddTmplStr = `
     <label class="col-sm-5 control-label">Payload</label>
     <div class="col-sm-5">
       <input type="text" id="payload" class="form-control" placeholder="Payload" name="payload" value="{{.Payload}}" onfocusout="enableSubmission()">
+      <br/>
       <input id="fileupload" type="file" title="add files" name="files" onchange="getFile()"/>
     </div>
   </div>
