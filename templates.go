@@ -36,7 +36,7 @@ const BaseTmplStr = `
 
     <footer class="footer">
       <div class="container">
-        <p class="text-muted">Contribute to skeddy <a href="http://github.com" id="ghlogo"><span class="fa fa-github" style="font-size:20px"></i></a></p>
+        <p class="text-muted">Contribute to skeddy <a href="https://github.com/gophergala2016/skeddy" id="ghlogo"><span class="fa fa-github" style="font-size:20px"></i></a></p>
       </div>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

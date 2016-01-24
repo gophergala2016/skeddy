@@ -15,16 +15,16 @@ A lightweight cloud savvy time based scheduler which does nothing but handoff th
       $ go get github.com/robfig/cron
       $ go get github.com/syndtr/goleveldb/leveldb
     ```
-- Install the project and build it
+- Clone the project and build it
 
   ```
-  $ go get https://github.com/gophergala2016/skeddy
+  $ git clone https://github.com/gophergala2016/skeddy.git
   $ go build
   ```
 - Start the server
 
   ```
-    $ skeddy [-d] [-i] [-p] [-s]
+    $ ./skeddy [-d] [-i] [-p] [-s]
   ```
 
 ### Options
@@ -52,7 +52,11 @@ cron_expression should be in accordance to the cron expression format given [her
 
 # Usage
 
-skeddy can be used to send periodic notifications to http endpoints. It has a user friendly UI interface with which anyone can hit my server and add their events in my skeddy. This can be used cross-platform.
+skeddy can be used to send periodic notifications to http endpoints. It has a user friendly UI interface with which anyone can hit my server and add their events in my skeddy. This can be used cross-platform unlike cron (used only in UNIX). Skeddy uses the same format as cron scheduler.
+
+# Motivation
+
+Motivation to build skeddy came because I wanted to use the efficient cron scheduler cross-platform and wanted it to be cloud savvy, so that I can add entries to my scheduler from anywhere.
 
 # License
 
