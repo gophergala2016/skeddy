@@ -1,6 +1,6 @@
 # skeddy
 
-A lightweight cloud savvy time based scheduler which does nothing but handoff the heavy lifting to a bunch of http endpoints. Optional payload can be sent to these http endpoints.
+Skeddy is a lightweight scheduler that can be configured to initiate http requests in fire-and-forget mode. Configuration options are inspired from cron. It is a cloud savvy time based scheduler.
 
 # Basic functionality
 
@@ -48,11 +48,11 @@ A lightweight cloud savvy time based scheduler which does nothing but handoff th
   <cron_expression> <http_endpoint> <payload>
 ```
 
-cron_expression should be in accordance to the cron expression format given [here](https://godoc.org/github.com/robfig/cron), payload can be raw json or json file from where payload will be read. JSON file should be given as @filename. While using UI interface, you can also upload a file whose content will be read and send as payload.
+cron_expression should be in accordance to the cron expression format given [here](https://godoc.org/github.com/robfig/cron), payload is optional and can be raw json or json file from where payload will be read. JSON file should be given as @filename. While using UI interface, you can also upload a file whose content will be read and send as payload.
 
 # Usage
 
-skeddy can be used to send periodic notifications to http endpoints. It has a user friendly UI interface with which anyone can hit my server and add their events in my skeddy. This can be used cross-platform unlike cron (used only in UNIX). Skeddy uses the same format as cron scheduler.
+Skeddy can be used to send periodic notifications to http endpoints. It has a user friendly UI interface with which anyone can hit my server and add their events in my skeddy. This can be used cross-platform unlike cron (used only in UNIX). Skeddy uses the same format as cron scheduler.
 
 # Motivation
 
