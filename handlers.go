@@ -1,10 +1,13 @@
 package main
 
 import (
-  "html/template"
-  "io"
-  "net/http"
-  "path"
+	"html/template"
+	"io"
+	"log"
+	"net/http"
+	"os"
+	"path"
+	"strings"
 )
 
 func viewHandler(w http.ResponseWriter, r *http.Request) {
@@ -59,22 +62,50 @@ func editHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func saveHandler(w http.ResponseWriter, r *http.Request) {
-	err := r.ParseForm()
-	if err != nil {
+	err1 := r.ParseMultipartForm(32 << 20)
+	if err1 != nil {
 		return
 	}
+	file, handler, err := r.FormFile("files")
+	if err == nil {
+		defer file.Close()
+
+		f, err := os.OpenFile(handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer f.Close()
+		io.Copy(f, file)
+	}
 	entry := NewEntryFromReq(r)
+	entry.Endpoint = strings.TrimSpace(entry.Endpoint)
+	replaced := strings.NewReplacer(" ", "%20")
+	entry.Endpoint = replaced.Replace(entry.Endpoint)
 	Store.SaveEntry(entry)
 	Skeddy.ReStart(Store.AllEntries())
 	http.Redirect(w, r, "/", 301)
 }
 
 func addHandler(w http.ResponseWriter, r *http.Request) {
-	err := r.ParseForm()
-	if err != nil {
+	err1 := r.ParseMultipartForm(32 << 20)
+	if err1 != nil {
 		return
 	}
+	file, handler, err := r.FormFile("files")
+	if err == nil {
+		defer file.Close()
+
+		f, err := os.OpenFile(handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer f.Close()
+		io.Copy(f, file)
+	}
 	entry := NewEntryFromReq(r)
+	entry.Endpoint = strings.TrimSpace(entry.Endpoint)
+	replaced := strings.NewReplacer(" ", "%20")
+	entry.Endpoint = replaced.Replace(entry.Endpoint)
 	Store.SaveEntry(entry)
 	Skeddy.AddEntry(entry)
 	http.Redirect(w, r, "/", 301)
@@ -85,4 +116,12 @@ func deleteHandler(w http.ResponseWriter, r *http.Request) {
 	Store.DeleteEntry(id)
 	Skeddy.ReStart(Store.AllEntries())
 	http.Redirect(w, r, "/", 301)
+}
+
+func validateExpression(w http.ResponseWriter, r *http.Request) {
+	expression := path.Base(r.URL.Path)
+	err := ParseExpression(expression)
+	if err != nil {
+		w.Write([]byte(err.Error()))
+	}
 }

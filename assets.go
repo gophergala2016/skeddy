@@ -4,6 +4,7 @@ var AssetMap = map[string]string{
 	"bootstrap.min.css": strBsCss,
 	"bootstrap.min.js":  strBsJs,
 	"skeddy.css":        strSkeddyCss,
+	"skeddy.js":         strSkeddyJs,
 }
 
 const strBsCss = `
@@ -58,4 +59,48 @@ body > .container {
 code {
   font-size: 80%;
 }
+`
+
+const strSkeddyJs = `
+function getFile() {
+  var filePath = document.getElementById("fileupload").value
+  var res = filePath.split("\\");
+  if (res[res.length - 1] !== "") {
+    document.getElementById("payload").value = "@" + res[res.length - 1]
+  } else {
+    document.getElementById("payload").value = ""
+  }
+}
+function validateExpression() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      document.getElementById("validate").innerHTML = xhttp.responseText;
+      enableSubmission()
+    }
+  };
+  if ($('#expression').val() !== "") {
+    xhttp.open("GET", "/validate/"+$('#expression').val(), true);
+    xhttp.send();
+  } else {
+    document.getElementById("validate").innerHTML = "Please enter a cron expression"
+  }
+}
+function validateURL() {
+  document.getElementById("validate_url").innerHTML = "";
+  var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+  var str = document.getElementById('url').value
+  if(!pattern.test(str)) {
+    document.getElementById("validate_url").innerHTML = "Please enter a valid URL.";
+  }
+  enableSubmission()
+}
+function enableSubmission() {
+  if ((document.getElementById('validate').innerHTML == "") && (document.getElementById('validate_url').innerHTML == "")) {
+    document.getElementById('submitBtn').disabled = false;
+  } else {
+    document.getElementById('submitBtn').disabled = true;
+  }
+}
+
 `

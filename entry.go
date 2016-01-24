@@ -1,16 +1,16 @@
 package main
 
-import(
-  "github.com/pborman/uuid"
-  "encoding/json"
-  "net/http"
+import (
+	"encoding/json"
+	"github.com/pborman/uuid"
+	"net/http"
 )
 
 type Entry struct {
-  ID          string
-  Expression  string
-  Endpoint    string
-  Payload     string
+	ID         string
+	Expression string
+	Endpoint   string
+	Payload    string
 }
 
 func NewEntry(exp string, ep string, p string) *Entry {
@@ -18,7 +18,7 @@ func NewEntry(exp string, ep string, p string) *Entry {
 }
 
 func (e *Entry) Bytes() []byte {
-  bt, err := json.Marshal(e)
+	bt, err := json.Marshal(e)
 	if err != nil {
 		return nil
 	}
@@ -26,12 +26,12 @@ func (e *Entry) Bytes() []byte {
 }
 
 func NewEntryFromBytes(b []byte) (*Entry, error) {
-  var e Entry
-  err := json.Unmarshal(b, &e)
-  if err != nil {
-    return nil, err
-  }
-  return &e, nil
+	var e Entry
+	err := json.Unmarshal(b, &e)
+	if err != nil {
+		return nil, err
+	}
+	return &e, nil
 }
 
 func NewEntryFromReq(r *http.Request) *Entry {

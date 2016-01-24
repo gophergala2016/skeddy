@@ -2,23 +2,23 @@ package main
 
 import (
 	"bytes"
+	"io/ioutil"
 	"log"
 	"net/http"
-	"strings"
 	"os"
-	"io/ioutil"
+	"strings"
 )
 
 func checkPayload(payload string) string {
 	if string(payload[0]) == "@" {
 		payload_file := payload[1:]
-		file, err := os.OpenFile(payload_file, os.O_RDONLY,0444)
-    if err != nil {
-      log.Fatal(err)
-      os.Exit(1)
-    }
-    defer file.Close()
-    reader,_ := ioutil.ReadAll(file)
+		file, err := os.OpenFile(payload_file, os.O_RDONLY, 0444)
+		if err != nil {
+			log.Fatal(err)
+			os.Exit(1)
+		}
+		defer file.Close()
+		reader, _ := ioutil.ReadAll(file)
 
 		return string(reader)
 	}

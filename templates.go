@@ -62,7 +62,7 @@ const ViewTmplStr = `
           <td>{{$value.Endpoint}}</td>
           <td>{{$value.Payload}}</td>
           <td><a href="/edit/{{$value.ID}}" class="btn btn-default">Edit</a></td>
-          <td><a href="/delete/{{$value.ID}}" class="btn btn-default">Delete</a></td>
+          <td><a href="/delete/{{$value.ID}}" class="btn btn-default" onclick="return confirm('Are you sure you want to delete {{$value.Expression}}')">Delete</a></td>
         </tr>
     {{ end }}
     </table>
@@ -75,37 +75,44 @@ const EditTmplStr = `
 {{ define "content" }}
 <div class="page-header"> <h4>Edit entries</h4> </div>
 <p class="lead">
-<form class="form-horizontal" action="/save/" method="post">
+<form enctype="multipart/form-data" name="edit-form" class="form-horizontal" action="/save/" method="post" >
   <input type="hidden" class="form-control" name="id" value="{{.ID}}">
   <div class="form-group">
     <label class="col-sm-2 control-label">Cron Expression</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="* * * * *" name="expression" value="{{.Expression}}">
+      <input type="text" id="expression" class="form-control" placeholder="* * * * *" name="expression" value="{{.Expression}}" onfocusout="validateExpression()" required>
+      <div id="validate"></div>
     </div>
   </div>
 
   <div class="form-group">
     <label class="col-sm-2 control-label">Endpoint</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="Endpoint URL" name="endpoint" value="{{.Endpoint}}">
+      <input type="url" id="url" class="form-control" placeholder="Endpoint URL" name="endpoint" value="{{.Endpoint}}" onfocusout="validateURL()" required>
+      <div id="validate_url"></div>
     </div>
   </div>
 
   <div class="form-group">
     <label class="col-sm-2 control-label">Payload</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="Endpoint URL" name="payload" value="{{.Payload}}">
+      <input type="text" id="payload" class="form-control" placeholder="Payload" name="payload" value="{{.Payload}}" onfocusout="enableSubmission()">
+      <input id="fileupload" type="file" title="add files" name="files" onchange="getFile()"/>
     </div>
   </div>
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <input type="submit" class="btn btn-default"/>
+      <input type="submit" class="btn btn-default" id="submitBtn" disabled/>
       <a href="/" class="btn btn-default">Cancel</a>
     </div>
   </div>
 </form>
 </p>
+<script src="/assets/js/skeddy.js"></script>
+<script>
+  enableSubmission();
+</script>
 {{ end }}
 `
 
@@ -114,36 +121,42 @@ const AddTmplStr = `
 {{ define "content" }}
 <div class="page-header"> <h4>Add entries</h4> </div>
 <p class="lead">
-<form class="form-horizontal" action="/add/" method="post">
+<form enctype="multipart/form-data" class="form-horizontal" action="/add/" method="post">
   <input type="hidden" class="form-control" name="id" value="{{.ID}}">
   <div class="form-group">
     <label class="col-sm-2 control-label">Cron Expression</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="* * * * *" name="expression" value="{{.Expression}}">
+      <input type="text" id="expression" class="form-control" placeholder="* * * * *" name="expression" value="{{.Expression}}" onfocusout="validateExpression()" required>
+      <div id="validate"></div>
     </div>
   </div>
 
   <div class="form-group">
     <label class="col-sm-2 control-label">Endpoint</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="Endpoint URL" name="endpoint" value="{{.Endpoint}}">
+      <input type="url" id="url" class="form-control" placeholder="Endpoint URL" name="endpoint" value="{{.Endpoint}}" onfocusout="validateURL()" required>
+      <div id="validate_url"></div>
     </div>
   </div>
 
   <div class="form-group">
     <label class="col-sm-2 control-label">Payload</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="Endpoint URL" name="payload" value="{{.Payload}}">
+      <input type="text" id="payload" class="form-control" placeholder="Payload" name="payload" value="{{.Payload}}" onfocusout="enableSubmission()">
+      <input id="fileupload" type="file" title="add files" name="files" onchange="getFile()"/>
     </div>
   </div>
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <input type="submit" class="btn btn-default"/>
+      <input type="submit" class="btn btn-default" id="submitBtn" disabled/>
       <a href="/" class="btn btn-default">Cancel</a>
     </div>
   </div>
 </form>
 </p>
+
+<script src="/assets/js/skeddy.js"></script>
+
 {{ end }}
 `

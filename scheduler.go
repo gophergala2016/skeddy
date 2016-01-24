@@ -24,8 +24,8 @@ func (s *Scheduler) Start(entries []*Entry) {
 }
 
 func (s *Scheduler) AddEntry(e *Entry) {
-  log.Println("Adding entry", e)
-  s.Instance.AddFunc(e.Expression, func() { Dispatch(e.Endpoint, e.Payload) })
+	log.Println("Adding entry", e)
+	s.Instance.AddFunc(e.Expression, func() { Dispatch(e.Endpoint, e.Payload) })
 }
 
 func (s *Scheduler) ReStart(entries []*Entry) {
@@ -42,4 +42,9 @@ func StartScheduler() {
 	Skeddy = NewScheduler()
 	entries := Store.AllEntries()
 	Skeddy.Start(entries)
+}
+
+func ParseExpression(expression string) error {
+	_, err := cron.Parse(expression)
+	return err
 }
