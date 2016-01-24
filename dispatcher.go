@@ -15,7 +15,6 @@ func checkPayload(payload string) string {
 		file, err := os.OpenFile(payload_file, os.O_RDONLY, 0444)
 		if err != nil {
 			log.Fatal(err)
-			os.Exit(1)
 		}
 		defer file.Close()
 		reader, _ := ioutil.ReadAll(file)
