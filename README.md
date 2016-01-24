@@ -2,6 +2,10 @@
 
 A lightweight cloud savvy time based scheduler which does nothing but handoff the heavy lifting to a bunch of http endpoints. Optional payload can be sent to these http endpoints.
 
+# Basic functionality
+
+[![ScreenCast](https://github.com/gophergala2016/skeddy/blob/master/images/video.jpg)](https://github.com/gophergala2016/skeddy/blob/master/screencast/skeddy.gif)
+
 # Installation
 
 - Install go packages as follows :
@@ -48,7 +52,7 @@ cron_expression should be in accordance to the cron expression format given [her
 
 # Usage
 
-skeddy can be used to send periodic notifications to http endpoints. It has a user friendly UI interface with which anyone can hit my server and add their events in my skeddy.
+skeddy can be used to send periodic notifications to http endpoints. It has a user friendly UI interface with which anyone can hit my server and add their events in my skeddy. This can be used cross-platform.
 
 # License
 

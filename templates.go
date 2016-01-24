@@ -10,6 +10,7 @@ const BaseTmplStr = `
     {{ template "title" . }}
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/skeddy.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   </head>
 
   <body>
@@ -35,7 +36,7 @@ const BaseTmplStr = `
 
     <footer class="footer">
       <div class="container">
-        <p class="text-muted">Copyright © skeddy All Right Reserved 2016</p>
+        <p class="text-muted">Contribute to skeddy <a href="http://github.com" id="ghlogo"><span class="fa fa-github" style="font-size:20px"></i></a></p>
       </div>
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -61,8 +62,8 @@ const ViewTmplStr = `
           <td>{{$value.Expression}}</td>
           <td>{{$value.Endpoint}}</td>
           <td>{{$value.Payload}}</td>
-          <td><a href="/edit/{{$value.ID}}" class="btn btn-default">Edit</a></td>
-          <td><a href="/delete/{{$value.ID}}" class="btn btn-default" onclick="return confirm('Are you sure you want to delete {{$value.Expression}}')">Delete</a></td>
+          <td><a href="/edit/{{$value.ID}}" class="btn btn-info">Edit</a></td>
+          <td><a href="/delete/{{$value.ID}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete {{$value.Expression}}')">Delete</a></td>
         </tr>
     {{ end }}
     </table>
@@ -104,8 +105,8 @@ const EditTmplStr = `
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <input type="submit" class="btn btn-default" id="submitBtn" disabled/>
-      <a href="/" class="btn btn-default">Cancel</a>
+      <input type="submit" class="btn btn-success" id="submitBtn" disabled/>
+      <a href="/" class="btn btn-danger">Cancel</a>
     </div>
   </div>
 </form>
@@ -150,8 +151,8 @@ const AddTmplStr = `
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <input type="submit" class="btn btn-default" id="submitBtn" disabled/>
-      <a href="/" class="btn btn-default">Cancel</a>
+      <input type="submit" class="btn btn-success" id="submitBtn" disabled/>
+      <a href="/" class="btn btn-danger">Cancel</a>
     </div>
   </div>
 </form>
