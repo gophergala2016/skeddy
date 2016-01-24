@@ -97,6 +97,7 @@ const EditTmplStr = `
     <label class="col-sm-2 control-label">Payload</label>
     <div class="col-sm-10">
       <input type="text" id="payload" class="form-control" placeholder="Payload" name="payload" value="{{.Payload}}" onfocusout="enableSubmission()">
+      <br/>
       <input id="fileupload" type="file" title="add files" name="files" onchange="getFile()"/>
     </div>
   </div>
