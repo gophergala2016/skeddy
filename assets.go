@@ -72,18 +72,16 @@ function getFile() {
   }
 }
 function validateExpression() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
-      document.getElementById("validate").innerHTML = xhttp.responseText;
-      enableSubmission()
-    }
-  };
   if ($('#expression').val() !== "") {
-    xhttp.open("GET", "/validate/"+$('#expression').val(), true);
-    xhttp.send();
+		$.ajax({
+		  url: "/validate/"+$('#expression').val(),
+		}).done(function(responseText) {
+			document.getElementById("validate").innerHTML = responseText;
+			enableSubmission()
+		});
   } else {
-    document.getElementById("validate").innerHTML = "Please enter a cron expression"
+    document.getElementById("validate").innerHTML = "Please enter a cron expression";
+		enableSubmission()
   }
 }
 function validateURL() {
