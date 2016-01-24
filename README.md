@@ -18,6 +18,7 @@ A lightweight cloud savvy time based scheduler which does nothing but handoff th
   $ go build
   ```
 - Start the server
+
   ```
     $ skeddy [-d] [-i] [-p] [-s]
   ```
@@ -43,8 +44,12 @@ A lightweight cloud savvy time based scheduler which does nothing but handoff th
   <cron_expression> <http_endpoint> <payload>
 ```
 
-cron_expression should be in accordance to the cron expression format given [here](https://godoc.org/github.com/robfig/cron), payload can be raw json or json file from where payload will be read. JSON file should be given as @filename.json.
+cron_expression should be in accordance to the cron expression format given [here](https://godoc.org/github.com/robfig/cron), payload can be raw json or json file from where payload will be read. JSON file should be given as @filename. While using UI interface, you can also upload a file whose content will be read and send as payload.
 
 # Usage
 
 skeddy can be used to send periodic notifications to http endpoints. It has a user friendly UI interface with which anyone can hit my server and add their events in my skeddy.
+
+# License
+
+  MIT
