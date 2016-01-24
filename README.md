@@ -4,7 +4,7 @@ A lightweight cloud savvy time based scheduler which does nothing but handoff th
 
 # Basic functionality
 
-[![ScreenCast](https://github.com/gophergala2016/skeddy/blob/master/images/video.jpg)](https://github.com/gophergala2016/skeddy/blob/master/screencast/skeddy.gif)
+![skeddy](https://github.com/gophergala2016/skeddy/blob/master/screencast/skeddy.gif)
 
 # Installation
 
